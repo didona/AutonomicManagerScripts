@@ -10,9 +10,12 @@
 set -x
 set -e
 
-RADARGUN_SLAVE_PID=`ps -ef | grep "org.radargun.Slave" | grep -v "grep" | awk '{print $2}'`
+ROOT=$(dirname ${0})
+source ${ROOT}/env.sh
 
+WPM_DIR=${SLAVE_INSTANCE_DIR}/monitor/wpm
 
+#RADARGUN_SLAVE_PID=`ps -ef | grep "org.radargun.Slave" | grep -v "grep" | awk '{print $2}'`
 
 #if [ -z "${RADARGUN_SLAVE_PID}" ]
 #then
@@ -30,7 +33,7 @@ RADARGUN_SLAVE_PID=`ps -ef | grep "org.radargun.Slave" | grep -v "grep" | awk '{
 
 echo "--- Stopping Producer && Consumer ---"
 pushd ${WPM_DIR}
-  ./run_cons_prod.sh start
+  ./run_cons_prod.sh stop
 popd
 
 
